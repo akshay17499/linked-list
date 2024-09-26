@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct node
+{
+    char name[100];
+    char number[20];
+    struct node *next;
+}anjana;
+
+anjana first_node;
+anjana*head=&first_node;
+
+void create_node()
+{
+    anjana*newnode;
+    newnode=(anjana*)malloc(sizeof(anjana));
+    newnode->next=NULL;
+    printf("enter name : ");
+    scanf("%s",newnode->name);
+    printf("enter mobile number : ");
+    scanf("%s",newnode->number);
+    head->next=newnode;
+    head=head->next;
+}
+
+void display(anjana*temp)
+{
+    while(temp!=NULL)
+    {
+        printf("name->%s number->%s\n",temp->name,temp->number);
+        temp=temp->next;
+    }
+}
+void arrange(anjana *temp)
+{
+  
+   anjana*temp1=temp->next;
+   while(temp!=NULL)
+   {
+      while(temp1!=NULL)
+     { 
+      int n = strcmp(temp->name,temp1->name);
+       if(n>0)
+       {
+           char name[50];
+           char num[20];
+           strcpy(name,temp->name);
+           strcpy(num,temp->number);
+           strcpy(temp->name,temp1->name);
+           strcpy(temp->number,temp1->number);
+           strcpy(temp1->name,name);
+           strcpy(temp1->number,num);
+         
+       }
+       temp1=temp1->next;
+     }
+    temp=temp->next;
+     if(temp!=NULL)
+    { 
+     temp1=temp->next;
+     }
+     
+   }
+}
+
+int main() 
+{
+    
+   while(1)
+   {
+       create_node();
+       int n;
+       printf("To enter more contacts  press 1 else press 0 : ");
+       scanf("%d",&n);
+       if(n!=1)
+       break;
+   }
+   anjana*temp=first_node.next;
+   printf("BEFORE SORTING CONTACTS\n");
+   display(temp);
+  arrange(temp);
+   printf("AFTER SORTING CONTACTS\n");
+  display(temp);
+}
