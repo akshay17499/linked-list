@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+typedef struct node node;
+
+node* create_node(int n)
+{
+    node*newnode;
+    newnode=(node*)malloc(sizeof(node));
+    newnode->next=NULL;
+    newnode->data=n;
+}
+
+void create_LL(node*temp,int num)
+{
+    while(num--)
+    {
+       printf("enter data : ");
+      int n;
+      scanf("%d",&n);
+      temp->next=create_node(n);
+       temp=temp->next;
+    }
+}
+
+void display(node*temp)
+{
+    while(temp!=NULL)
+    {
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    
+}
+int main()
+{
+    node head;
+    head.next=NULL;
+    int num;
+    printf("no of nodes to be created : ");
+    scanf("%d",&num);
+   create_LL(&head,num);
+    display(head.next);
+    
+}
